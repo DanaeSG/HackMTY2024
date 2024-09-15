@@ -1,5 +1,6 @@
 package com.example.loginuser
 
+import Login
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -10,8 +11,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.capitalone.ui.theme.CapitalOneTheme
+import com.example.capitalone.views.configuration
 import com.example.loginuser.data.RetrofitServiceFactory
 import kotlinx.coroutines.launch
+import upcoming_invoices
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,14 +47,15 @@ fun PreviewView() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "login_screen") {
         composable("login_screen") {
-            /*fdfs*/
+            Login()
         }
-        composable("detail_screen") {
-            /*fdfs*/
+        composable("upcoming_invoices") {
+            upcoming_invoices()
         }
-        composable("register_screen") {
+        composable("configuration") {
+            configuration()
             /*
-            RegistrationApp(
+            configuration(
                 navController = navController,
                 userService = userService,
             )
