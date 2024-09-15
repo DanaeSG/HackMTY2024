@@ -168,7 +168,7 @@ fun ScrollContent(navController: NavController) {
 
         // Botón azul "Register"
         Button(
-            onClick = { navController.navigate("past_invoices") },
+            onClick = { navController.navigate("upcoming_invoices") },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF004878)),  // Color azul
             shape = RoundedCornerShape(8.dp),
             modifier = Modifier

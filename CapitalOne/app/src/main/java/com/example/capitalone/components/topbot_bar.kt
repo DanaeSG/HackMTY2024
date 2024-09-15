@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.Image
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
+import androidx.navigation.NavController
 //import com.example.capitalone.R
 import com.example.capitalone.ui.theme.CO_Blue
 import com.example.loginuser.R
@@ -39,7 +40,7 @@ fun CustomTopAppBar(title: String) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CustomBottomAppBar(page: Int) {
+fun CustomBottomAppBar(page: Int, navController: NavController) {
     Box(
         modifier = Modifier.drawBehind {
             drawLine(
@@ -58,25 +59,25 @@ fun CustomBottomAppBar(page: Int) {
                         .fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    IconButton(onClick = { /* do something */ }) {
+                    IconButton(onClick = { navController.navigate("upcoming_invoices") }) {
                         val ISize: Int = if (page == 1) 32 else 24
 
                         Image(
                             painter = painterResource(id = R.drawable.new_svgrepo_com),
-                            contentDescription = "New Icon",
+                            contentDescription = "Upcoming Invoices",
                             modifier = Modifier.size(ISize.dp)
                         )
                     }
                     Spacer(modifier = Modifier.width(70.dp))
-                    IconButton(onClick = { /* do something */ }) {
+                    IconButton(onClick = { navController.navigate("past_invoices") }) {
                         Image(
                             painter = painterResource(id = R.drawable.past_edit_editor_format_text_tool_svgrepo_com),
-                            contentDescription = "Another Icon",
+                            contentDescription = "Past Invoices",
                             modifier = Modifier.size(24.dp)
                         )
                     }
                     Spacer(modifier = Modifier.width(70.dp))
-                    IconButton(onClick = { /* do something */ }) {
+                    IconButton(onClick = { navController.navigate("configuration") }) {
                         Icon(
                             Icons.Filled.Settings,
                             contentDescription = "Settings"

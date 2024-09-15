@@ -15,6 +15,7 @@ import com.example.capitalone.views.PreviewChartImageView
 import com.example.capitalone.views.configuration
 import com.example.loginuser.data.RetrofitServiceFactory
 import kotlinx.coroutines.launch
+import past_invoices
 import upcoming_invoices
 
 class MainActivity : ComponentActivity() {
@@ -46,22 +47,26 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun PreviewView() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "chart") {
-        // Chart
-        composable("chart"){
-            PreviewChartImageView()
-        }
+    NavHost(navController = navController, startDestination = "login_screen") {
+        // Login Screen
         composable("login_screen") {
             LargeTopAppBarExample(navController = navController)
         }
+        // Chart
+        //composable("chart"){
+        //    PreviewChartImageView()
+        //}
+        // Upcoming Invoices
         composable("upcoming_invoices") {
-            upcoming_invoices()
+            upcoming_invoices(navController = navController)
         }
+        // Past Invoices
         composable("past_invoices") {
-            upcoming_invoices()
+            past_invoices(navController = navController)
         }
+        // Configuration
         composable("configuration") {
-            configuration()
+            configuration(navController = navController)
             /*
             configuration(
                 navController = navController,

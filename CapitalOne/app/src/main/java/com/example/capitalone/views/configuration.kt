@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.runtime.*
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
+import androidx.navigation.NavController
 import com.example.capitalone.ui.theme.CO_Blue
 import com.example.capitalone.ui.theme.CO_Grey
 
@@ -255,15 +256,14 @@ fun configurationColumn(){
     }
 }
 
-@Preview
 @Composable
-fun configuration(){
+fun configuration(navController: NavController){
     Scaffold(
         topBar = {
             CustomTopAppBar(title = "Configuration")
         },
         bottomBar = {
-            CustomBottomAppBar(page = 1)
+            CustomBottomAppBar(page = 1, navController)
         }
     ) { innerPadding ->
         Box(

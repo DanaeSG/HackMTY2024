@@ -11,6 +11,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import com.example.capitalone.ui.theme.CO_Grey
 
 data class p_Invoice(
@@ -76,15 +77,14 @@ fun p_InvoiceList() {
     }
 }
 
-@Preview
 @Composable
-fun past_invoices() {
+fun past_invoices(navController: NavController) {
     Scaffold(
         topBar = {
             CustomTopAppBar(title = "Past Invoices")
         },
         bottomBar = {
-            CustomBottomAppBar(page = 1)
+            CustomBottomAppBar(page = 1, navController)
         }
     ) { innerPadding ->
         Box(
