@@ -18,13 +18,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
+import androidx.navigation.NavController
 import com.example.loginuser.R
 
 //import com.example.capitalone.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LargeTopAppBarExample() {
+fun LargeTopAppBarExample(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
 
     Scaffold(
@@ -59,7 +60,7 @@ fun LargeTopAppBarExample() {
                 .background(color = Color.White)
                 .padding(innerPadding)
         ){
-            ScrollContent()
+            ScrollContent(navController)
         }
 
     }
@@ -67,7 +68,7 @@ fun LargeTopAppBarExample() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ScrollContent() {
+fun ScrollContent(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -167,7 +168,7 @@ fun ScrollContent() {
 
         // Botón azul "Register"
         Button(
-            onClick = { /* handle registration */ },
+            onClick = { navController.navigate("past_invoices") },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF004878)),  // Color azul
             shape = RoundedCornerShape(8.dp),
             modifier = Modifier
@@ -206,11 +207,4 @@ fun ScrollContent() {
             )
         }
     }
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun Login() {
-    LargeTopAppBarExample()
 }
