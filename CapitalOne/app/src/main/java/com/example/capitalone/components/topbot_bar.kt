@@ -60,12 +60,11 @@ fun CustomBottomAppBar(page: Int, navController: NavController) {
                     horizontalArrangement = Arrangement.Center
                 ) {
                     IconButton(onClick = { navController.navigate("upcoming_invoices") }) {
-                        val ISize: Int = if (page == 1) 32 else 24
 
                         Image(
                             painter = painterResource(id = R.drawable.new_svgrepo_com),
                             contentDescription = "Upcoming Invoices",
-                            modifier = Modifier.size(ISize.dp)
+                            modifier = Modifier.size(24.dp)
                         )
                     }
                     Spacer(modifier = Modifier.width(70.dp))

@@ -1,4 +1,5 @@
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -13,6 +14,11 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.example.capitalone.ui.theme.CO_Grey
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
 
 data class p_Invoice(
     val date: String,
@@ -30,11 +36,12 @@ val pastInvoices = listOf(
 )
 
 @Composable
-fun p_InvoiceCard(invoice: Invoice) {
+fun p_InvoiceCard(invoice: p_Invoice, onCardClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
+            .padding(8.dp)
+            .clickable { onCardClick() }, // Disparamos el callback al hacer clic
         colors = CardDefaults.cardColors(containerColor = CO_Grey)
     ) {
         Column(
@@ -54,14 +61,16 @@ fun p_InvoiceCard(invoice: Invoice) {
     }
 }
 
+
 @Composable
-fun p_InvoiceList() {
+fun p_InvoiceList(snackbarHostState: SnackbarHostState) {
+    val coroutineScope = rememberCoroutineScope()
+
     LazyColumn(
         modifier = Modifier.padding(16.dp),
-
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        upcomingInvoices.groupBy { it.date }.forEach { (date, invoices) ->
+        pastInvoices.groupBy { it.date }.forEach { (date, invoices) ->
             item {
                 Text(
                     text = date,
@@ -71,20 +80,32 @@ fun p_InvoiceList() {
                 )
             }
             items(invoices) { invoice ->
-                p_InvoiceCard(invoice = invoice)
+                p_InvoiceCard(invoice = invoice) {
+                    // Mostrar Snackbar al hacer clic en una tarjeta
+                    coroutineScope.launch {
+                        snackbarHostState.showSnackbar("Archivo descargado en el teléfono")
+                    }
+                }
             }
         }
     }
 }
 
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun past_invoices(navController: NavController) {
+    val snackbarHostState = remember { SnackbarHostState() }
+
     Scaffold(
         topBar = {
             CustomTopAppBar(title = "Past Invoices")
         },
         bottomBar = {
             CustomBottomAppBar(page = 1, navController)
+        },
+        snackbarHost = {
+            SnackbarHost(hostState = snackbarHostState) // Snackbar host para mostrar mensajes emergentes
         }
     ) { innerPadding ->
         Box(
@@ -93,7 +114,7 @@ fun past_invoices(navController: NavController) {
                 .background(Color.White)
                 .padding(innerPadding)
         ) {
-            InvoiceList() // Tu función para mostrar la lista de facturas
+            p_InvoiceList(snackbarHostState = snackbarHostState)
         }
     }
 }
