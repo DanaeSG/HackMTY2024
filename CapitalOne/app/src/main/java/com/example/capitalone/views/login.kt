@@ -1,52 +1,110 @@
-package com.example.capitalone.views
-
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.foundation.Image
+import androidx.compose.ui.res.painterResource
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.capitalone.ui.theme.CapitalOneTheme
-import com.example.capitalone.views.TopBar
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Menu
+import com.example.capitalone.R
 
-@Preview(showBackground = true)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Login() {
-    TopBar()
-    var username by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+fun LargeTopAppBarExample() {
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
+
+    Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            LargeTopAppBar(
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color(0xFF004878),  // Cambiar el color de fondo a #004878
+                    titleContentColor = MaterialTheme.colorScheme.primary
+                ),
+                title = {
+                    // Aquí cambiamos el título por una imagen PNG
+                    Image(
+                        painter = painterResource(id = R.drawable.logo),  // Asegúrate de que el archivo logo.png esté en res/drawable
+                        contentDescription = "App Logo",
+                        modifier = Modifier.size(120.dp),  // Ajusta el tamaño según tu imagen
+                        contentScale = ContentScale.Fit
+                    )
+                },
+                navigationIcon = {
+                    IconButton(onClick = { /* do something */ }) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Localized description"
+                        )
+                    }
+                },
+                actions = {
+                    IconButton(onClick = { /* do something */ }) {
+                        Icon(
+                            imageVector = Icons.Filled.Menu,
+                            contentDescription = "Localized description"
+                        )
+                    }
+                },
+                scrollBehavior = scrollBehavior
+            )
+        },
+    ) { innerPadding ->
+        ScrollContent(innerPadding)
+    }
+}
+
+@Composable
+fun ScrollContent(innerPadding: PaddingValues) {
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(innerPadding)
+            .padding(horizontal = 16.dp, vertical = 8.dp)
     ) {
+        var username by remember { mutableStateOf("") }
+        var password by remember { mutableStateOf("") }
+
         Text(
             text = "Account Number",
+            style = MaterialTheme.typography.bodyLarge
         )
         TextField(
             value = username,
             onValueChange = { username = it },
-            label = { Text("Username") },
-            modifier = Modifier.fillMaxWidth()
+            label = { Text("Account Number") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp)
         )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
         Text(
             text = "Password",
+            style = MaterialTheme.typography.bodyLarge
         )
         TextField(
             value = password,
             onValueChange = { password = it },
-            label = { Text("Username") },
-            modifier = Modifier.fillMaxWidth()
+            label = { Text("Password") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
+            visualTransformation = PasswordVisualTransformation()
         )
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Login() {
+    LargeTopAppBarExample()
 }
