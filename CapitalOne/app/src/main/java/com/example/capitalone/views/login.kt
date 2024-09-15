@@ -87,13 +87,6 @@ fun ScrollContent(innerPadding: PaddingValues) {
                     .fillMaxWidth()
                     .padding(vertical = 8.dp),
                 colors = TextFieldDefaults.colors(
-                    // Definir el color del texto y placeholder
-                    focusedTextColor = Color.Black,
-                    unfocusedTextColor = Color.Black,
-                    placeholderColor = Color(0xFFB3B3B3),
-                    focusedPlaceholderColor = Color(0xFFB3B3B3),
-                    focusedContainerColor = Color.Transparent,
-                    unfocusedContainerColor = Color.Transparent
                 ),
                 placeholder = { Text("Account Number", color = Color(0xFFB3B3B3)) },
                 shape = MaterialTheme.shapes.small.copy(all = CornerSize(4.dp))
@@ -123,9 +116,6 @@ fun ScrollContent(innerPadding: PaddingValues) {
                     .padding(vertical = 8.dp),
                 visualTransformation = PasswordVisualTransformation(),
                 colors = TextFieldDefaults.colors(
-                    containerColor = Color.Transparent,
-                    placeholderColor = Color(0xFFB3B3B3),
-                    textColor = Color.Black
                 ),
                 placeholder = { Text("Password", color = Color(0xFFB3B3B3)) },
                 shape = MaterialTheme.shapes.small.copy(all = CornerSize(4.dp))
