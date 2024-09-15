@@ -1,4 +1,5 @@
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.ui.res.painterResource
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -13,6 +14,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.ui.Alignment
 import com.example.capitalone.R
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -29,13 +31,18 @@ fun LargeTopAppBarExample() {
                     titleContentColor = MaterialTheme.colorScheme.primary
                 ),
                 title = {
-                    // Aquí cambiamos el título por una imagen PNG
-                    Image(
-                        painter = painterResource(id = R.drawable.logo),  // Asegúrate de que el archivo logo.png esté en res/drawable
-                        contentDescription = "App Logo",
-                        modifier = Modifier.size(120.dp),  // Ajusta el tamaño según tu imagen
-                        contentScale = ContentScale.Fit
-                    )
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()  // Asegura que el Row ocupe todo el ancho disponible
+                            .wrapContentSize(Alignment.Center)  // Centra el contenido dentro del Row
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.logo),  // Asegúrate de que el archivo logo.png esté en res/drawable
+                            contentDescription = "App Logo",
+                            modifier = Modifier.size(120.dp),  // Ajusta el tamaño según tu imagen
+                            contentScale = ContentScale.Fit
+                        )
+                    }
                 },
                 navigationIcon = {
                     IconButton(onClick = { /* do something */ }) {
@@ -56,7 +63,8 @@ fun LargeTopAppBarExample() {
                 scrollBehavior = scrollBehavior
             )
         },
-    ) { innerPadding ->
+    )
+{ innerPadding ->
         ScrollContent(innerPadding)
     }
 }
