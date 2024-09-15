@@ -1,5 +1,6 @@
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -51,17 +52,24 @@ fun LargeTopAppBarExample() {
             )
         },
     ) { innerPadding ->
-        ScrollContent(innerPadding)
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = Color.White)
+                .padding(innerPadding)
+        ){
+            ScrollContent()
+        }
+
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ScrollContent(innerPadding: PaddingValues) {
+fun ScrollContent() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(innerPadding)
             .padding(horizontal = 40.dp, vertical = 40.dp)  // Padding a los lados
     ) {
         var username by remember { mutableStateOf("") }
