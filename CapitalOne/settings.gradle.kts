@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Capital One"
+rootProject.name = "CapitalOne"
 include(":app")
  
