@@ -1,12 +1,15 @@
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.ui.res.painterResource
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -44,38 +47,22 @@ fun LargeTopAppBarExample() {
                         )
                     }
                 },
-                navigationIcon = {
-                    IconButton(onClick = { /* do something */ }) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Localized description"
-                        )
-                    }
-                },
-                actions = {
-                    IconButton(onClick = { /* do something */ }) {
-                        Icon(
-                            imageVector = Icons.Filled.Menu,
-                            contentDescription = "Localized description"
-                        )
-                    }
-                },
                 scrollBehavior = scrollBehavior
             )
         },
-    )
-{ innerPadding ->
+    ) { innerPadding ->
         ScrollContent(innerPadding)
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScrollContent(innerPadding: PaddingValues) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(innerPadding)
-            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .padding(horizontal = 40.dp, vertical = 40.dp)  // Padding a los lados
     ) {
         var username by remember { mutableStateOf("") }
         var password by remember { mutableStateOf("") }
@@ -84,14 +71,34 @@ fun ScrollContent(innerPadding: PaddingValues) {
             text = "Account Number",
             style = MaterialTheme.typography.bodyLarge
         )
-        TextField(
-            value = username,
-            onValueChange = { username = it },
-            label = { Text("Account Number") },
+
+        // Caja para el TextField con borde
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 8.dp)
-        )
+                .border(BorderStroke(1.dp, Color(0xFFB3B3B3)) // Borde con color #B3B3B3
+                )
+        ) {
+            TextField(
+                value = username,
+                onValueChange = { username = it },
+                label = { Text("Account Number") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
+                colors = TextFieldDefaults.colors(
+                    // Definir el color del texto y placeholder
+                    focusedTextColor = Color.Black,
+                    unfocusedTextColor = Color.Black,
+                    placeholderColor = Color(0xFFB3B3B3),
+                    focusedPlaceholderColor = Color(0xFFB3B3B3),
+                    focusedContainerColor = Color.Transparent,
+                    unfocusedContainerColor = Color.Transparent
+                ),
+                placeholder = { Text("Account Number", color = Color(0xFFB3B3B3)) },
+                shape = MaterialTheme.shapes.small.copy(all = CornerSize(4.dp))
+            )
+        }
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -99,17 +106,76 @@ fun ScrollContent(innerPadding: PaddingValues) {
             text = "Password",
             style = MaterialTheme.typography.bodyLarge
         )
-        TextField(
-            value = password,
-            onValueChange = { password = it },
-            label = { Text("Password") },
+
+        // Caja para el TextField con borde
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 8.dp),
-            visualTransformation = PasswordVisualTransformation()
-        )
+                .border(BorderStroke(1.dp, Color(0xFFB3B3B3)) // Borde con color #B3B3B3
+                )
+        ) {
+            TextField(
+                value = password,
+                onValueChange = { password = it },
+                label = { Text("Password") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
+                visualTransformation = PasswordVisualTransformation(),
+                colors = TextFieldDefaults.colors(
+                    containerColor = Color.Transparent,
+                    placeholderColor = Color(0xFFB3B3B3),
+                    textColor = Color.Black
+                ),
+                placeholder = { Text("Password", color = Color(0xFFB3B3B3)) },
+                shape = MaterialTheme.shapes.small.copy(all = CornerSize(4.dp))
+            )
+        }
+
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        // Botón azul "Register"
+        Button(
+            onClick = { /* handle registration */ },
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF004878)),  // Color azul
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 0.dp)  // Padding horizontal para los botones
+        ) {
+            Text(text = "Register", color = Color.White)
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Botón negro "I forgot my password"
+        Button(
+            onClick = { /* handle forgot password */ },
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2C2C2C)),  // Color negro
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 0.dp)  // Padding horizontal para los botones
+        ) {
+            Text(text = "I forgot my password", color = Color.White)
+        }
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        // Texto y enlace de login
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text(text = "Already have an account? ")
+            Text(
+                text = "Login",
+                color = Color(0xFF004878),  // Color del enlace
+                modifier = Modifier.clickable { /* handle navigation to login */ }
+            )
+        }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
