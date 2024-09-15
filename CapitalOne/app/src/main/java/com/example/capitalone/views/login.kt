@@ -18,7 +18,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
-import com.example.capitalone.R
+import com.example.loginuser.R
+
+//import com.example.capitalone.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

@@ -13,8 +13,9 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.Image
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
-import com.example.capitalone.R
+//import com.example.capitalone.R
 import com.example.capitalone.ui.theme.CO_Blue
+import com.example.loginuser.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

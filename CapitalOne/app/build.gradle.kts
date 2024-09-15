@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.capitalone"
+    namespace = "com.example.loginuser"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.capitalone"
+        applicationId = "com.example.loginuser"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -51,8 +51,7 @@ android {
 
 dependencies {
     val nav_version = "2.7.7"
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -61,7 +60,10 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation(libs.androidx.navigation.compose)
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
