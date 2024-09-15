@@ -1,47 +1,50 @@
-package com.example.capitalone
+package com.example.loginuser
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.capitalone.ui.theme.CapitalOneTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         setContent {
             CapitalOneTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                PreviewView()
+
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
 
-@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    CapitalOneTheme {
-        Greeting("Android")
+fun PreviewView() {
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = "login_screen") {
+        composable("login_screen") {
+            /*fdfs*/
+        }
+        composable("detail_screen") {
+            /*fdfs*/
+        }
+        composable("register_screen") {
+            /*
+            RegistrationApp(
+                navController = navController,
+                userService = userService,
+            )
+            */
+
+        }
     }
 }
+
+
