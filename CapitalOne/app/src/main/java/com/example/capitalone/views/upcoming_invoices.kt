@@ -100,7 +100,7 @@ fun upcoming_invoices() {
             CustomTopAppBar(title = "Upcoming Invoices")
         },
         bottomBar = {
-            CustomBottomAppBar()
+            CustomBottomAppBar(page = 1)
         }
     ) { innerPadding ->
         Box(

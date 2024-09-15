@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.Image
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
 import com.example.capitalone.R
 import com.example.capitalone.ui.theme.CO_Blue
@@ -24,14 +25,20 @@ fun CustomTopAppBar(title: String) {
             titleContentColor = Color.White
         ),
         title = {
-            Text(title)
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ){
+                Text(title)
+            }
+
         }
     )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CustomBottomAppBar() {
+fun CustomBottomAppBar(page: Int) {
     Box(
         modifier = Modifier.drawBehind {
             drawLine(
@@ -51,10 +58,12 @@ fun CustomBottomAppBar() {
                     horizontalArrangement = Arrangement.Center
                 ) {
                     IconButton(onClick = { /* do something */ }) {
+                        val ISize: Int = if (page == 1) 32 else 24
+
                         Image(
                             painter = painterResource(id = R.drawable.new_svgrepo_com),
                             contentDescription = "New Icon",
-                            modifier = Modifier.size(24.dp)
+                            modifier = Modifier.size(ISize.dp)
                         )
                     }
                     Spacer(modifier = Modifier.width(70.dp))
