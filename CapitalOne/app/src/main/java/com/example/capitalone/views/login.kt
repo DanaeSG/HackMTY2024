@@ -19,32 +19,34 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.capitalone.ui.theme.CapitalOneTheme
+import com.example.capitalone.views.TopBar
 
 @Preview(showBackground = true)
 @Composable
 fun Login() {
-        var username by remember { mutableStateOf("") }
-        var password by remember { mutableStateOf("") }
-        Column(
-            modifier = Modifier.fillMaxSize()
-        ) {
-            Text(
-                text = "Account Number",
-            )
-            TextField(
-                value = username,
-                onValueChange = { username = it },
-                label = { Text("Username") },
-                modifier = Modifier.fillMaxWidth()
-            )
-            Text(
-                text = "Password",
-            )
-            TextField(
-                value = password,
-                onValueChange = { password = it },
-                label = { Text("Username") },
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
+    TopBar()
+    var username by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Text(
+            text = "Account Number",
+        )
+        TextField(
+            value = username,
+            onValueChange = { username = it },
+            label = { Text("Username") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        Text(
+            text = "Password",
+        )
+        TextField(
+            value = password,
+            onValueChange = { password = it },
+            label = { Text("Username") },
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
 }
