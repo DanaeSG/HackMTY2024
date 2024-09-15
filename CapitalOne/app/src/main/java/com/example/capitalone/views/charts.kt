@@ -25,7 +25,7 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 // Define the URLs for your charts
-const val BASE_URL = "http://10.0.2.2:5000/"
+const val BASE_URL = "http://74.208.104.149:5000/"
 
 enum class ChartType(val endpoint: String) {
     CUMULATIVE_SPENDING("chart/cumulative_spending"),
