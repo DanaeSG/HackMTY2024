@@ -51,6 +51,12 @@ android {
 
 dependencies {
     val nav_version = "2.7.7"
+    // Librería para hacer solicitudes HTTP
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+    // Librería para cargar imágenes
+    implementation(libs.glide)
+    annotationProcessor(libs.glide.compiler)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
