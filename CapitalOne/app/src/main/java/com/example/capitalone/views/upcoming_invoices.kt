@@ -1,5 +1,7 @@
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -15,6 +17,8 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -88,74 +92,24 @@ fun InvoiceList() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-//@Preview(showBackground = false)
+@Preview
 @Composable
-fun PreviewInvoiceList(innerPaddingValues: PaddingValues) {
+fun upcoming_invoices() {
     Scaffold(
         topBar = {
-            TopAppBar(
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = CO_Blue,
-                    titleContentColor = Color.White,
-                ),
-                title = {
-                    Text("Upcoming Invoices")
-                }
-            )
+            CustomTopAppBar(title = "Upcoming Invoices")
         },
+        bottomBar = {
+            CustomBottomAppBar()
+        }
     ) { innerPadding ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .background(Color.White)
                 .padding(innerPadding)
-        ){
-            InvoiceList()
+        ) {
+            InvoiceList() // Tu función para mostrar la lista de facturas
         }
-
-    }
-}
-
-@Preview
-@Composable
-fun BottomAppBarExample() {
-    Scaffold(
-        bottomBar = {
-            BottomAppBar(
-                containerColor = Color.White,
-                actions = {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center
-                    ){
-                        IconButton(onClick = { /* do something */ }) {
-                            Image(
-                                painter = painterResource(id = R.drawable.new_svgrepo_com), // Reemplaza con el nombre del archivo
-                                contentDescription = "New Icon",
-                                modifier = Modifier.size(24.dp)
-                            )
-                        }
-                        IconButton(onClick = { /* do something */ }) {
-                            Image(
-                                painter = painterResource(id = R.drawable.past_edit_editor_format_text_tool_svgrepo_com),
-                                contentDescription = "fdsnjifds",
-                                modifier = Modifier.size(24.dp)
-                            )
-                        }
-                        IconButton(onClick = { /* do something */ }) {
-                            Icon(
-                                Icons.Filled.Settings,
-                                contentDescription = "Localized description",
-                            )
-                        }
-                    }
-
-                },
-            )
-        },
-    ) { innerPadding ->
-        PreviewInvoiceList(innerPadding)
     }
 }
