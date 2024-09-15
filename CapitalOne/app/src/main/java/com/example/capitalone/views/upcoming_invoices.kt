@@ -1,15 +1,29 @@
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Send
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.capitalone.R
+import com.example.capitalone.ui.theme.CO_Blue
+import com.example.capitalone.ui.theme.CO_Grey
 
 data class Invoice(
     val date: String,
@@ -32,7 +46,7 @@ fun InvoiceCard(invoice: Invoice) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.LightGray)
+        colors = CardDefaults.cardColors(containerColor = CO_Grey)
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
@@ -52,9 +66,10 @@ fun InvoiceCard(invoice: Invoice) {
 }
 
 @Composable
-fun InvoiceList(innerPadding: PaddingValues) {
+fun InvoiceList() {
     LazyColumn(
         modifier = Modifier.padding(16.dp),
+        
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         upcomingInvoices.groupBy { it.date }.forEach { (date, invoices) ->
@@ -74,22 +89,73 @@ fun InvoiceList(innerPadding: PaddingValues) {
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview(showBackground = true)
+//@Preview(showBackground = false)
 @Composable
-fun PreviewInvoiceList() {
+fun PreviewInvoiceList(innerPaddingValues: PaddingValues) {
     Scaffold(
         topBar = {
             TopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary,
+                    containerColor = CO_Blue,
+                    titleContentColor = Color.White,
                 ),
                 title = {
-                    Text("Small Top App Bar")
+                    Text("Upcoming Invoices")
                 }
             )
         },
     ) { innerPadding ->
-        InvoiceList(innerPadding)
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.White)
+                .padding(innerPadding)
+        ){
+            InvoiceList()
+        }
+
+    }
+}
+
+@Preview
+@Composable
+fun BottomAppBarExample() {
+    Scaffold(
+        bottomBar = {
+            BottomAppBar(
+                containerColor = Color.White,
+                actions = {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Center
+                    ){
+                        IconButton(onClick = { /* do something */ }) {
+                            Image(
+                                painter = painterResource(id = R.drawable.new_svgrepo_com), // Reemplaza con el nombre del archivo
+                                contentDescription = "New Icon",
+                                modifier = Modifier.size(24.dp)
+                            )
+                        }
+                        IconButton(onClick = { /* do something */ }) {
+                            Image(
+                                painter = painterResource(id = R.drawable.past_edit_editor_format_text_tool_svgrepo_com),
+                                contentDescription = "fdsnjifds",
+                                modifier = Modifier.size(24.dp)
+                            )
+                        }
+                        IconButton(onClick = { /* do something */ }) {
+                            Icon(
+                                Icons.Filled.Settings,
+                                contentDescription = "Localized description",
+                            )
+                        }
+                    }
+
+                },
+            )
+        },
+    ) { innerPadding ->
+        PreviewInvoiceList(innerPadding)
     }
 }
