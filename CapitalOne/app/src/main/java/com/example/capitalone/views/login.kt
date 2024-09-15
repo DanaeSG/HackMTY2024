@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -15,10 +16,8 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.draw.clip
 import com.example.capitalone.R
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -84,7 +83,10 @@ fun ScrollContent() {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .border(BorderStroke(1.dp, Color(0xFFB3B3B3)) // Borde con color #B3B3B3
+                .clip(RoundedCornerShape(16.dp)) // Redondeo de las esquinas de la caja
+                .border(
+                    border = BorderStroke(1.dp, Color(0xFFB3B3B3)), // Borde con color #B3B3B3
+                    shape = RoundedCornerShape(16.dp) // Redondeo del borde
                 )
         ) {
             TextField(
@@ -93,15 +95,27 @@ fun ScrollContent() {
                 label = { Text("Account Number") },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 8.dp),
+                    .padding(vertical = 2.dp),
                 colors = TextFieldDefaults.colors(
+                    //setting the text field background when it is focused
+                    focusedContainerColor = Color.Transparent,
+
+                    //setting the text field background when it is unfocused or initial state
+                    unfocusedContainerColor = Color.Transparent,
+
+                    //setting the text field background when it is disabled
+                    disabledContainerColor = Color.Transparent,
+
+                    focusedIndicatorColor = Color.Transparent, // Elimina el borde cuando está enfocado
+                    unfocusedIndicatorColor = Color.Transparent, // Elimina el borde cuando no está enfocado
+                    disabledIndicatorColor = Color.Transparent // Elimina el borde cuando está deshabilitado
                 ),
-                placeholder = { Text("Account Number", color = Color(0xFFB3B3B3)) },
+                placeholder = { Text("Account Number") },
                 shape = MaterialTheme.shapes.small.copy(all = CornerSize(4.dp))
             )
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
         Text(
             text = "Password",
@@ -112,7 +126,10 @@ fun ScrollContent() {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .border(BorderStroke(1.dp, Color(0xFFB3B3B3)) // Borde con color #B3B3B3
+                .clip(RoundedCornerShape(16.dp)) // Redondeo de las esquinas de la caja
+                .border(
+                    border = BorderStroke(1.dp, Color(0xFFB3B3B3)), // Borde con color #B3B3B3
+                    shape = RoundedCornerShape(16.dp) // Redondeo del borde
                 )
         ) {
             TextField(
@@ -121,10 +138,23 @@ fun ScrollContent() {
                 label = { Text("Password") },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 8.dp),
+                    .padding(vertical = 2.dp),
                 visualTransformation = PasswordVisualTransformation(),
                 colors = TextFieldDefaults.colors(
-                ),
+
+                    //setting the text field background when it is focused
+                    focusedContainerColor = Color.Transparent,
+
+                    //setting the text field background when it is unfocused or initial state
+                    unfocusedContainerColor = Color.Transparent,
+
+                    //setting the text field background when it is disabled
+                    disabledContainerColor = Color.Transparent,
+
+                    focusedIndicatorColor = Color.Transparent, // Elimina el borde cuando está enfocado
+                    unfocusedIndicatorColor = Color.Transparent, // Elimina el borde cuando no está enfocado
+                    disabledIndicatorColor = Color.Transparent // Elimina el borde cuando está deshabilitado
+                    ),
                 placeholder = { Text("Password", color = Color(0xFFB3B3B3)) },
                 shape = MaterialTheme.shapes.small.copy(all = CornerSize(4.dp))
             )
@@ -137,6 +167,7 @@ fun ScrollContent() {
         Button(
             onClick = { /* handle registration */ },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF004878)),  // Color azul
+            shape = RoundedCornerShape(8.dp),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 0.dp)  // Padding horizontal para los botones
@@ -150,6 +181,7 @@ fun ScrollContent() {
         Button(
             onClick = { /* handle forgot password */ },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2C2C2C)),  // Color negro
+            shape = RoundedCornerShape(8.dp),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 0.dp)  // Padding horizontal para los botones
